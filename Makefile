@@ -30,4 +30,4 @@ $(SOLIB): $(OBJECTS)
 
 # Run the model
 run: target
-	mdx --model $(MODELPATH) --addlibrary $(SOLIB)
+	mdx --model 'Model/Root/01 Root' --addlibrary $(SOLIB) RootModel.mdxv
