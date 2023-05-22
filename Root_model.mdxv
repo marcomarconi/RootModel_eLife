@@ -1,7 +1,7 @@
 // Parameters for MorphoDynamX
 [Main]
 MDXVersion: 2.0
-MDXRevision: 2-613-g46128500-dirty
+MDXRevision: 2-793
 ClearColor: 0
 SurfOffset: 0.01
 Slices: 1024
@@ -79,7 +79,7 @@ CameraZoom: 0
 [Clip1]
 Enable: false
 Grid: false
-Width: 116.642
+Width: 116.776
 GridSize: 1
 GridSquares: 3
 GridColor: 11
@@ -90,7 +90,7 @@ Frame: 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
 [Clip2]
 Enable: false
 Grid: false
-Width: 116.642
+Width: 116.776
 GridSize: 1
 GridSquares: 3
 GridColor: 12
@@ -101,7 +101,7 @@ Frame: 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
 [Clip3]
 Enable: false
 Grid: false
-Width: 116.642
+Width: 116.776
 GridSize: 1
 GridSquares: 3
 GridColor: 13
@@ -188,7 +188,7 @@ DrawCutSurf: false
 Mode: 0
 CutSurfGrid: false
 Material: 0
-Size: 1.05751 1.05751 1.05751
+Size: 1.05767 1.05767 1.05767
 SurfSize: 15 15
 LineWidth: 1
 BezPoints: 5 5
@@ -362,6 +362,16 @@ ProcessName: Mesh/Heat Map/Measures2D/Geometry/Area
 NumParms: 1
 ParmName: Heat Name
 ParmString: Area
+ProcessName: Mesh/Heat Map/Measures2D/Geometry/Junction Distance
+NumParms: 4
+ParmName: Heat Name
+ParmString: Junction Distance
+ParmName: Mode
+ParmString: Min
+ParmName: Only Direct Junctions
+ParmString: No
+ParmName: Ignore Border Cells
+ParmString: Yes
 ProcessName: Mesh/Heat Map/Measures2D/Geometry/Neighbors
 NumParms: 1
 ParmName: Heat Name
@@ -424,6 +434,14 @@ ParmName: Heat Name
 ParmString: Average
 ParmName: Signal
 ParmString: 
+ProcessName: Mesh/Heat Map/Measures3D/Signal/Percentile
+NumParms: 3
+ParmName: Heat Name
+ParmString: Percentile
+ParmName: Signal
+ParmString: 
+ParmName: Percentile
+ParmString: 0.95
 ProcessName: Mesh/Heat Map/Measures3D/Signal/Total
 NumParms: 2
 ParmName: Heat Name
@@ -590,6 +608,8 @@ ParmName: Nhbd Size
 ParmString: 0.2
 ParmName: Nhbd Offset
 ParmString: 0.01
+ProcessName: Mesh/Misc/Fix Global Orientation
+NumParms: 0
 ProcessName: Mesh/Misc/Print Flip Table
 NumParms: 1
 ParmName: File Name
@@ -660,19 +680,19 @@ ParmName: Label Start
 ParmString: 1
 ParmName: Label Step
 ParmString: 1
-ProcessName: Mesh/Segmentation/Set Face Label
-NumParms: 1
-ParmName: Label
-ParmString: 0
-ProcessName: Mesh/Segmentation/Set Face Labeling
-NumParms: 3
+ProcessName: Mesh/Segmentation/Set Label
+NumParms: 4
 ParmName: Label
 ParmString: 0
 ParmName: Labeling
 ParmString: 
 ParmName: Label Name
 ParmString: 
+ParmName: Dimension
+ParmString: All
 ProcessName: Mesh/Segmentation/Vertex Labels From Faces
+NumParms: 0
+ProcessName: Mesh/Segmentation/Vertex Labels From Volumes
 NumParms: 0
 ProcessName: Mesh/Segmentation/Watershed Segmentation
 NumParms: 3
@@ -692,6 +712,12 @@ ProcessName: Mesh/Selection/Clear Selection
 NumParms: 0
 ProcessName: Mesh/Selection/Copy Selection
 NumParms: 0
+ProcessName: Mesh/Selection/Extend face selection by Normal and Distance
+NumParms: 2
+ParmName: Angle range
+ParmString: 30.0
+ParmName: Euclidean Distance
+ParmString: 40.0
 ProcessName: Mesh/Selection/Invert Selection
 NumParms: 1
 ParmName: Dimension
@@ -706,6 +732,10 @@ ProcessName: Mesh/Selection/Save Selection
 NumParms: 1
 ParmName: File Name
 ParmString: Selection.txt
+ProcessName: Mesh/Selection/Select Adjacent Cells
+NumParms: 1
+ParmName: Dimension
+ParmString: Vertices
 ProcessName: Mesh/Selection/Select All
 NumParms: 0
 ProcessName: Mesh/Selection/Select Border
@@ -731,7 +761,15 @@ NumParms: 0
 ProcessName: Mesh/Selection/Select Faces of Volumes
 NumParms: 0
 ProcessName: Mesh/Selection/Select Incident Cells
-NumParms: 0
+NumParms: 2
+ParmName: Cell Dimension
+ParmString: Faces
+ParmName: Select Dimension
+ParmString: Vertices
+ProcessName: Mesh/Selection/Select Margin for Wege-Mesh
+NumParms: 1
+ParmName: Dimension
+ParmString: Vertices
 ProcessName: Mesh/Selection/Select Vertices Extend
 NumParms: 1
 ParmName: Distance
@@ -762,6 +800,12 @@ ParmName: Signal 2
 ParmString: 
 ParmName: Operation
 ParmString: Addition
+ProcessName: Mesh/Signal/Delete Signal
+NumParms: 2
+ParmName: Signal Name
+ParmString: 
+ParmName: Mesh Id
+ParmString: 
 ProcessName: Mesh/Signal/Difference of Gaussians
 NumParms: 3
 ParmName: Radius 1
@@ -809,12 +853,12 @@ ParmString: 1.0
 ParmName: Signal
 ParmString: 
 ProcessName: Mesh/Signal/Project Mesh Curvature
-NumParms: 10
+NumParms: 11
 ParmName: Type
 ParmString: Gaussian
 ParmName: Neighborhood
 ParmString: 5.0
-ParmName: AutoScale
+ParmName: Auto Scale
 ParmString: Yes
 ParmName: Min Curv
 ParmString: -50.0
@@ -830,6 +874,8 @@ ParmName: Select Nhbd
 ParmString: No
 ParmName: Do Axis
 ParmString: Yes
+ParmName: Update Normals
+ParmString: Yes
 ProcessName: Mesh/Signal/Project Signal
 NumParms: 6
 ParmName: Min Dist
@@ -844,6 +890,12 @@ ParmName: Max Signal
 ParmString: 60000.0
 ParmName: Signal
 ParmString: Signal
+ProcessName: Mesh/Signal/Rename Signal
+NumParms: 2
+ParmName: Signal Name
+ParmString: 
+ParmName: Mesh Id
+ParmString: 
 ProcessName: Mesh/Signal/Rescale Signal
 NumParms: 5
 ParmName: Zero Ref
@@ -856,12 +908,6 @@ ParmName: Maximum
 ParmString: 1.0
 ParmName: Signal
 ParmString: 
-ProcessName: Mesh/Signal/Scale Signals
-NumParms: 2
-ParmName: Signal
-ParmString: 
-ParmName: Operation
-ParmString: Inverse
 ProcessName: Mesh/Signal/Set Mesh Signal
 NumParms: 3
 ParmName: Value
@@ -880,6 +926,12 @@ ParmName: Passes
 ParmString: 3
 ParmName: Signal
 ParmString: 
+ProcessName: Mesh/Signal/Transform Signal
+NumParms: 2
+ParmName: Signal
+ParmString: 
+ParmName: Operation
+ParmString: Invert
 ProcessName: Mesh/Signal/Trim Signal
 NumParms: 2
 ParmName: Lower Threshold
@@ -932,14 +984,18 @@ ParmName: Angle
 ParmString: 0.0
 ParmName: Scale
 ParmString: 0.5
+ProcessName: Mesh/Structure/Transform Mesh by frame
+NumParms: 0
 ProcessName: Mesh/System/Delete Cell Complex
 NumParms: 1
 ParmName: Cell Complex Name
 ParmString: Tissue
 ProcessName: Mesh/System/Delete Selection
-NumParms: 1
+NumParms: 2
 ParmName: Delete Dangling Cells
 ParmString: Yes
+ParmName: Dimension
+ParmString: All
 ProcessName: Mesh/System/Export
 NumParms: 4
 ParmName: File Name
@@ -1085,9 +1141,9 @@ ParmString: Hard
 ParmName: Remesh during execution
 ParmString: False
 ParmName: Mesh Update Timer
-ParmString: 30
+ParmString: 3
 ParmName: Snapshots Timer
-ParmString: 30
+ParmString: 0
 ParmName: Snapshots Directory
 ParmString: Test
 ParmName: Debug
@@ -1095,7 +1151,7 @@ ParmString: True
 ParmName: Debug File
 ParmString: debug.csv
 ParmName: Frame fixed on QC
-ParmString: 0,220
+ParmString: 0,0
 ParmName: Frame fixed on Substrate
 ParmString: 0,0
 ParmName: Execution Time
@@ -1181,7 +1237,7 @@ ParmString: 0.04
 ParmName: Verbose
 ParmString: True
 ProcessName: Model/Root/04 Divide Cells
-NumParms: 23
+NumParms: 26
 ParmName: Cell Max Area
 ParmString: 250000
 ParmName: Cell Wall Min
@@ -1192,6 +1248,10 @@ ParmName: Cell Pinch
 ParmString: 0.2
 ParmName: Cell Max Pinch
 ParmString: 2
+ParmName: Center Noise
+ParmString: 0.0
+ParmName: Wall Noise
+ParmString: 0.0
 ParmName: Verbose
 ParmString: True
 ParmName: Division Algorithm
@@ -1202,6 +1262,8 @@ ParmName: Minimum Polarity Vector Norm
 ParmString: 0.05
 ParmName: Max Division Time
 ParmString: 50
+ParmName: Min Division Time
+ParmString: 2
 ParmName: Division Meristem Size
 ParmString: 200
 ParmName: Division Promoter Level
@@ -2186,7 +2248,7 @@ ParmName: Mode
 ParmString: Normal
 ParmName: Threshold
 ParmString: 0
-ProcessName: Stack/Morphology/Close by label
+ProcessName: Stack/Morphology/Close by Label
 NumParms: 4
 ParmName: X Radius
 ParmString: 1
@@ -2244,6 +2306,16 @@ ParmName: Auto Resize
 ParmString: No
 ParmName: Round Nhbd
 ParmString: No
+ProcessName: Stack/Morphology/Erode by Label
+NumParms: 4
+ParmName: X Radius
+ParmString: 1
+ParmName: Y Radius
+ParmString: 1
+ParmName: Z Radius
+ParmString: 1
+ParmName: Round Nhbd
+ParmString: No
 ProcessName: Stack/Morphology/Fill Holes
 NumParms: 5
 ParmName: X Radius
@@ -2256,7 +2328,7 @@ ParmName: Depth
 ParmString: 0
 ParmName: Fill Value
 ParmString: 30000
-ProcessName: Stack/Morphology/Open by label
+ProcessName: Stack/Morphology/Open by Label
 NumParms: 4
 ParmName: X Radius
 ParmString: 1
@@ -2336,6 +2408,12 @@ ParmName: Start Label
 ParmString: 2
 ParmName: Min Color
 ParmString: 10000
+ProcessName: Stack/Segmentation/Relabel
+NumParms: 2
+ParmName: Start Label
+ParmString: 1
+ParmName: Step
+ParmString: 1
 ProcessName: Stack/Segmentation/Watershed3D
 NumParms: 0
 ProcessName: Stack/System/Clear Main Stack
@@ -2662,7 +2740,17 @@ ParmName: Stagger
 ParmString: 0
 ParmName: Labeling
 ParmString: Cells
-ProcessName: Tools/Cell Maker/Mesh 3D/Shapes/Create Sphere
+ProcessName: Tools/Cell Maker/Mesh 3D/Marching Cubes/Mesh
+NumParms: 4
+ParmName: Cube Size
+ParmString: 5.0
+ParmName: Radius
+ParmString: 15.0
+ParmName: Use Lines
+ParmString: Yes
+ParmName: Verbose
+ParmString: No
+ProcessName: Tools/Cell Maker/Mesh 3D/Marching Cubes/Sphere
 NumParms: 3
 ParmName: Cube Size
 ParmString: 5.0
@@ -2723,12 +2811,14 @@ ParmString:
 ParmName: CC Out
 ParmString: 
 ProcessName: Tools/Cell Maker/Mesh 3D/Tools/Separate 3D Cells
-NumParms: 3
+NumParms: 4
 ParmName: CC Name
 ParmString: 
 ParmName: CC Out
 ParmString: 
 ParmName: 2D Mesh
+ParmString: No
+ParmName: Use Face Selection
 ParmString: No
 ProcessName: Tools/Cell Maker/Mesh 3D/Voronoi/Create Voronoi Cells
 NumParms: 9
@@ -2808,6 +2898,8 @@ ProcessName: Tools/Cell Maker/Point Cloud/Point Cloud Add
 NumParms: 1
 ParmName: Point Cloud Mesh
 ParmString: CC
+ProcessName: Tools/Cell Maker/Point Cloud/Point Cloud From Stack
+NumParms: 0
 ProcessName: Tools/Cell Maker/Point Cloud/Point Cloud Radial 2D
 NumParms: 3
 ParmName: Nr of Points
